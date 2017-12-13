@@ -1,3 +1,10 @@
-<p>
-  article-list works!
-</p>
+<div class="row" *ngIf="articles">
+    <div class="col-md-3" *ngFor="let article of articles">
+        <app-article [article]="article"></app-article>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <ngb-pagination [collectionSize]="articleService.total" [(page)]="articleService.page" aria-label="Default pagination"></ngb-pagination>
+    </div>
+</div>

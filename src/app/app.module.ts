@@ -1,3 +1,5 @@
+import { HttpClientModule  } from '@angular/common/http';
+import { ArticleService } from './services/article.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -18,9 +20,10 @@ import { ArticleComponent } from './article/article.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ArticleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
