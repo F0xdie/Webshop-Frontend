@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+.category-container{
+    position: absolute;
+    width: 20%;
+    left:0;
+    top:70px;
+    right:0;
+    bottom:0;
+}
+
+.article-container{
+    position: absolute;
+    width: 80%;
+    left:20%;
+    top:70px;
+    right:0;
+    bottom:0;
+}

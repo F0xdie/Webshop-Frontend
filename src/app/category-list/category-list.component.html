@@ -1,0 +1,8 @@
+<div >
+  <!-- <app-category></app-category> -->
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let category of categories" [ngClass]="{'active': category.active}" (click)="categoryChanged(category)">
+        <app-category [category]="category"></app-category>
+    </li>      
+  </ul>    
+</div>

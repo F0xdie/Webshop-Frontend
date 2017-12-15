@@ -1,10 +1,25 @@
-<div class="row" *ngIf="articles">
-    <div class="col-md-3" *ngFor="let article of articles">
-        <app-article [article]="article"></app-article>
-    </div>
+<div class="category-container">
+<app-category-list></app-category-list>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <ngb-pagination [collectionSize]="articleService.total" [(page)]="articleService.page" aria-label="Default pagination"></ngb-pagination>
-    </div>
+<div class="article-container">
+    <div class="container">
+        <div class="card-deck">
+            <div class="row" *ngIf="articles">
+                <div class="col-md-3" *ngFor="let article of articles">
+                    <app-article [article]="article"></app-article>
+                </div>
+            </div>
+        </div>
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <ngb-pagination [collectionSize]="articleService.total" [(page)]="articleService.page" aria-label="Default pagination"></ngb-pagination>
+        </div>
+    </div> -->
+
+        <div *ngIf="articleService" class="row">
+            <div class="col-md-12 text-xs-center">
+                <ngb-pagination [collectionSize]="articleService.total" [(page)]="articleService.page" (pageChange)="loadPage($event)" [(pageSize)]="articleService.size" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+            </div>
+        </div>
+    </div>  
 </div>

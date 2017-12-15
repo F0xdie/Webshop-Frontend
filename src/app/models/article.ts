@@ -8,9 +8,7 @@ export class Article {
   visible: boolean;
   category: Category;
 
-  constructor() {
-
-  }
+  constructor() {}
   // List<OrderPosition>: orderPositions;
   // StorageLocation: storageLocation;
   // Category: category;

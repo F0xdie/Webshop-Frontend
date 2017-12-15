@@ -1,4 +1,7 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ArticleService } from './../services/article.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  searchQuery: string;
+  constructor(private articleService: ArticleService, private modalService: NgbModal) {
+    this.searchQuery = '';
+  }
 
   ngOnInit() {
+  }
+
+  setSearchQuery(searchValue: string) {
+    this.articleService.setSearchQuery(searchValue);
   }
 
 }
