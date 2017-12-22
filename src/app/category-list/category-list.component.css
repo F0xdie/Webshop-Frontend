@@ -1,0 +1,8 @@
+.list-group-item:hover {
+    cursor: pointer;
+}
+
+.list-group-item.active {
+    background-color: #343A40;
+    border-color: #343A40;
+}

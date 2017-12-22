@@ -1,4 +1,41 @@
+.navbar-expand-lg {
+    width: 100%;
+}
+
+/* .navbar-brand {
+ padding-left: 10px;
+} */
+
 .fa-shopping-cart {
     padding-right: 1em;
     color: white;
+    cursor: pointer;
 }
+
+.circle { 
+    width: 20px;
+    height: 20px;
+    background: #dc3545; 
+    border: 1px solid white;
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    border-radius: 10px;
+    position: absolute;
+    top: 1px;
+    right: 224px;
+ }
+ .circle p{
+    text-align: center;  
+    color: white;
+    margin-top:-1px;
+    font-size: 12px
+ }
+
+ .userName {
+     color: #C3CEC6;
+     margin-right: 15px;
+     padding-top: 3px;
+ }
+
+
+ 

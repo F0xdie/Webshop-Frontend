@@ -1,31 +1,45 @@
 import { Observable } from 'rxjs/Observable';
-import { Article } from './../models/article';
 import { Subject } from 'rxjs/Subject';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { CartItem } from './../models/cart-item';
+import { Article } from './../models/article';
+import { Injectable, Input } from '@angular/core';
 
 @Injectable()
 export class CartService {
+  private selectedArticles: CartItem[];
+  private subject: Subject<number>;
+  @Input() filledCart: boolean;
 
-  constructor(private  httpClient: HttpClient) { }
-
-  private cartSubject = new Subject<CartState>();
-  Article: article[]= [];
-  CartState = this.cartSubject.asObservable();
-
-  addProduct(_article:any) {
-    console.log('in service');
-    this.Article.push(_article)
-    this.cartSubject.next(<CartState>{loaded: true, article:  this.Article});
-  }
-  removeArticle(id: number) {
-    this.Article = this.Article.filter((_item) =>  _item.id !== id )
-    this.cartSubject.next(<CartState>{loaded: false , article:  this.Article});
+  constructor() {
+    this.subject = new Subject<number>();
+    this.selectedArticles = new Array();
+    this.filledCart = false;
   }
 
-getAllArticles(): Observable <any> {
-  return this.httpClient.get(url);
-}
+  addArticle(article: Article) {
+    const filteredList = this.selectedArticles.filter(item => item.article.articleID === article.articleID);
+    if (filteredList.length > 0) {
+      const item = filteredList[0];
+      item.increaseAmount();
+    } else {
+      const newItem = new CartItem(article);
+      this.selectedArticles.push(newItem);
+      this.filledCart = true;
+    }
 
-}
+    this.subject.next(this.selectedArticles.length);
+  }
+
+  public hasItemsInCart(): Observable<number> {
+    return this.subject.asObservable();
+  }
+
+  removeArticle() {
+
+  }
+
+  getSelectedArticles(): CartItem[] {
+    return this.selectedArticles;
+  }
+
 }

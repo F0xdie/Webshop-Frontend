@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Article } from '../models/article';
 import { Pageable } from '../models/pageable';
+import { Config } from '../config';
 
 @Injectable()
 export class ArticleService {
 
-   page: number;
-   size: number;
-   total: number;
-   private searchQuery: string;
-   private categoryChoice: string;
+  private baseUrl: string;
 
-   subject: Subject<Article[]>;
+  page: number;
+  size: number;
+  total: number;
+  private searchQuery: string;
+  private categoryChoice: string;
+
+  subject: Subject<Article[]>;
 
   constructor(private httpClient: HttpClient) {
     this.total = 0;
@@ -22,9 +25,10 @@ export class ArticleService {
     this.page = 0;
     this.searchQuery = '';
     this.categoryChoice = '';
+    this.baseUrl = Config.url + 'articles';
   }
 
-  public setSearchQuery(searchQuery: string ) {
+  public setSearchQuery(searchQuery: string) {
     this.searchQuery = searchQuery;
     this.getData();
   }
@@ -37,14 +41,14 @@ export class ArticleService {
   public getData(): Observable<Article[]> {
     let pageForRequest = this.page;
 
-    if ( pageForRequest > 0 ) {
-       pageForRequest -= 1 ;
+    if (pageForRequest > 0) {
+      pageForRequest -= 1;
     }
 
-    let url = '//localhost:8080/articles/?page=' + pageForRequest + '&size=' + this.size;
+    let url = this.baseUrl + '/?page=' + pageForRequest + '&size=' + this.size;
 
     if (this.subject === undefined) {
-     this.subject = new Subject<Article[]>();
+      this.subject = new Subject<Article[]>();
     }
 
     if (this.searchQuery !== '') {
@@ -56,13 +60,14 @@ export class ArticleService {
     }
 
     this.httpClient.get<Pageable>(url).subscribe(data => {
-       this.size = data.size;
-       this.total = data.totalElements;
+      // this.httpClient.get<Pageable>(url, {withCredentials: true}).subscribe(data => {
+      this.size = data.size;
+      this.total = data.totalElements;
 
-       const content = <Article[]>data.content;
-       this.subject.next(content);
+      const content = <Article[]>data.content;
+      this.subject.next(content);
 
     });
     return this.subject.asObservable();
-   }
+  }
 }

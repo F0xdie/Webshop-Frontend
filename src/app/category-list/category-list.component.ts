@@ -17,6 +17,19 @@ export class CategoryListComponent implements OnInit {
   ngOnInit() {
     this.categoryService.getData().subscribe(data => {
       this.categories = data;
+      const dummyCategory = new Category();
+      dummyCategory.active = true;
+      dummyCategory.name = 'Alle Kategorien';
+      this.categories.push(dummyCategory);
+      this.categories.sort((cat1, cat2) => {
+          if (cat1.name > cat2.name) {
+              return 1;
+         }else if (cat2.name > cat1.name) {
+           return -1;
+         }else {
+           return 0;
+         }
+      });
     });
   }
 
@@ -26,6 +39,16 @@ export class CategoryListComponent implements OnInit {
     });
     category.active = true;
     this.articleService.setCategoryChoice(category.name);
+    if (category.name === 'Alle Kategorien') {
+      this.articleService.setCategoryChoice('');
+    }
   }
+
+  // categoryReset() {
+  //   this.articleService.setCategoryChoice('');
+  //   this.categories.filter(cat => cat.active === true).forEach(cat => {
+  //     cat.active = false;
+  //   });
+  // }
 
 }

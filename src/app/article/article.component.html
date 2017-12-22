@@ -1,10 +1,22 @@
-
-  <div class="card">
+<!-- <div class="card">
+  <div class="card-block">
     <h6>{{article.description}}</h6>
-    <!-- <img class="card-img-top" src="{{article.articlePicture}}" alt="Card image cap"> -->
+    <img class="card-img-top" src="{{article.articlePicture}}" alt="Card image cap">
     <div class="card-body">
-      <!-- <p class="card-text">{{article.description}}</p> -->
-      <button type="button" class="btn btn-success">Hinzufügen</button>         
+      <p class="card-text">{{article.description}}</p>
+      <button type="button" class="btn btn-success" (click)="addArticle()">Hinzufügen</button>
     </div>
   </div>
+</div> -->
 
+
+<div class="card">
+  <h6 class="card-title">{{article.description}}</h6>
+  <div class="card-block">
+    <img class="card-img-top" src="http://assets.esselte.com/catalogfiles/products/Desktop__3B0E8B316F6628285894AC010FF09BA5__190__190__ll_11090099_g-171c5c67c3fa7065bbc4df893c07f081.png" alt="Card image cap">
+    <p class="card-text">Artikelbeschreibung</p>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-outline-success my-2 my-sm-0" (click)="addArticle()">Hinzufügen <i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+  </div>
+</div>

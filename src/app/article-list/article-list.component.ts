@@ -2,6 +2,7 @@ import { Article } from './../models/article';
 import { ArticleService } from './../services/article.service';
 import { Component, OnInit } from '@angular/core';
 import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: 'app-article-list',
@@ -13,9 +14,10 @@ export class ArticleListComponent implements OnInit {
 
   articles: Article[];
 
-  constructor(private articleService: ArticleService, config: NgbPaginationConfig) {
+  constructor(private articleService: ArticleService, config: NgbPaginationConfig, private navbarService: NavbarService) {
     this.articles = new Array();
     this.loadData();
+    this.navbarService.show();
    }
 
   ngOnInit() {

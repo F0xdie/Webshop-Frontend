@@ -1,3 +1,43 @@
-<p>
-  cart works!
-</p>
+<div class="modal-header">
+  <h4 class="modal-title">Warenkob</h4>
+  <button type="button" class="close" aria-label="Close"(click)="activeModal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- <p>Inhalt&hellip;</p> -->
+  <!-- <table>
+    <tr>
+      <th>Anzahl</th>
+      <th>Artikel</th>
+      <th>Preis</th>
+    </tr>
+    <tr *ngFor="let cartItem of cartService.getSelectedArticles()">
+      <td>{{cartItem.getAmount()}}</td>
+      <td>{{cartItem.article.description}}</td>
+      <td>{{cartItem.article.price}}</td>
+    </tr>
+
+  </table> -->
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Position</th>
+          <th scope="col">Artikel</th>
+          <th scope="col">Anzahl</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cartItem of cartService.getSelectedArticles(); let i = index" [style.background-color] = " i%2 === 0  ? 'white' : 'lightgray' " >
+          <th scope="row">{{i+1}}</th>
+          <td>{{cartItem.article.description}}</td>
+          <td><button class="btn btn-light"><i class="fa fa-minus" aria-hidden="true" (click)="addArticle()"></i></button>     {{cartItem.getAmount()}}    <button class="btn btn-light"><i class="fa fa-plus" aria-hidden="true"></i></button> </td> 
+        </tr>
+      </tbody>
+    </table>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-success my-2 my-sm-0">Bestätigung</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Beenden</button>
+</div>

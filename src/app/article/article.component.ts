@@ -1,3 +1,4 @@
+import { CartService } from './../services/cart.service';
 import { Article } from './../models/article';
 import { Component, OnInit, Input } from '@angular/core';
 import { ArticleService } from '../services/article.service';
@@ -9,14 +10,17 @@ import { ArticleService } from '../services/article.service';
 })
 export class ArticleComponent implements OnInit {
 
-    @Input() article: Article;
+  @Input() article: Article;
 
-   constructor() {
+  constructor(private cartService: CartService) {
 
-   }
+  }
 
-   ngOnInit() {
+  ngOnInit() {
 
-   }
+  }
 
+  addArticle() {
+    this.cartService.addArticle(this.article);
+  }
 }
